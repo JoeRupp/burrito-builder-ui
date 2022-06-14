@@ -62,6 +62,7 @@ class OrderForm extends Component {
         <button
           key={ingredient}
           name={ingredient}
+          className="ingredientBtn"
           onClick={(e) => this.handleIngredientChange(e)}
         >
           {ingredient}
