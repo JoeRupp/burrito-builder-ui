@@ -33,7 +33,7 @@ class OrderForm extends Component {
         ingredients: this.state.ingredients,
       };
 
-      apiCalls.makeOrder(newOrder);
+      apiCalls.makeOrder(newOrder).then(() => this.props.addNewOrder());
       this.clearInputs();
     }
   };

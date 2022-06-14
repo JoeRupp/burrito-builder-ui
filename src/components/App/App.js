@@ -1,33 +1,31 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import apiCalls from "../../apiCalls";
 import Orders from "../../components/Orders/Orders";
 import OrderForm from "../../components/OrderForm/OrderForm";
 
-class App extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      orders: [],
-    };
-  }
+const App = () => {
+  const [orders, setOrders] = useState([]);
 
-  componentDidMount() {
-    apiCalls.getOrders().then((data) => this.setState({ orders: data.orders }));
-  }
+  useEffect(() => {
+    apiCalls.getOrders().then((data) => setOrders(data.orders));
+  }, []);
 
-  render() {
-    return (
-      <main className="App">
-        <header>
-          <h1>Burrito Builder</h1>
-          <OrderForm />
-        </header>
+  const addNewOrder = () => {
+    apiCalls.getOrders().then((data) => setOrders(data.orders));
+    console.log("whoop");
+  };
 
-        <Orders orders={this.state.orders} />
-      </main>
-    );
-  }
-}
+  return (
+    <main className="App">
+      <header>
+        <h1>Burrito Builder</h1>
+        <OrderForm addNewOrder={addNewOrder} />
+      </header>
+
+      <Orders orders={orders} />
+    </main>
+  );
+};
 
 export default App;
