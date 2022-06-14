@@ -70,4 +70,12 @@ describe("burrito builder user flow", () => {
       );
     cy.get("input[type=text]").should("have.value", "");
   });
+
+  it("should display a message if no orders load", () => {
+    cy.intercept("GET", "http://localhost:3001/api/v1/orders", {
+      statusCode: 500,
+    });
+    cy.visit("http://localhost:3000/");
+    cy.contains("No orders yet!");
+  });
 });
