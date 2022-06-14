@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import apiCalls from "../../apiCalls";
 
 class OrderForm extends Component {
   constructor(props) {
@@ -23,7 +24,18 @@ class OrderForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.clearInputs();
+    if (!this.state.name || this.state.ingredients.length === 0) {
+      console.log("you havent filled out the form completely");
+      this.clearInputs();
+    } else {
+      const newOrder = {
+        name: this.state.name,
+        ingredients: this.state.ingredients,
+      };
+
+      apiCalls.makeOrder(newOrder);
+      this.clearInputs();
+    }
   };
 
   clearInputs = () => {
