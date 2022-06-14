@@ -13,7 +13,6 @@ const App = () => {
 
   const addNewOrder = () => {
     apiCalls.getOrders().then((data) => setOrders(data.orders));
-    console.log("whoop");
   };
 
   return (
@@ -22,7 +21,6 @@ const App = () => {
         <h1>Burrito Builder</h1>
         <OrderForm addNewOrder={addNewOrder} />
       </header>
-
       <Orders orders={orders} />
     </main>
   );
